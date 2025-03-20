@@ -1,4 +1,4 @@
-# Euskal Herriko mapa Google Mapetan
+# Euskal Herriko mapa Online Mapetan
 
 Ikusi [web bertsioa](https://codesyntax.github.io/ehmapa) xehetasun guztiak lortzeko
 
