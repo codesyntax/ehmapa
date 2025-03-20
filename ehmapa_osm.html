@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="eu">
+  <head>
+    <title>Euskal Herriko mapa OpenStreetMap mapetan</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <link
+      rel="stylesheet"
+      id="leaflet-css-css"
+      href="https://unpkg.com/leaflet@1.3.4/dist/leaflet.css?ver=7a82077d7cc248014014b0a28d320683"
+      type="text/css"
+      media="all"
+    />
+
+    <script
+      src="https://unpkg.com/leaflet@1.3.4/dist/leaflet.js?ver=7a82077d7cc248014014b0a28d320683"
+      id="leaflet-js-js"
+    ></script>
+  </head>
+  <body>
+    <div id="mapid" style="width: 800px; height: 600px"></div>
+
+    <script>
+      var osm = L.tileLayer(
+        'https://tile.openstreetmap.bzh/eu/{z}/{x}/{y}.png',
+        {
+          attribution:
+            '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors. Euskarazko mapa: OpenStreetMap.fr',
+        },
+      );
+
+      var osm_orig = L.tileLayer(
+        'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
+        {
+          attribution:
+            '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+        },
+      );
+      // IGN ES
+      var ignorto = L.tileLayer.wms(
+        'https://www.ign.es/wms-inspire/pnoa-ma?SERVICE=WMS&',
+        {
+          layers: 'OI.OrthoimageCoverage', //nombre de la capa (ver get capabilities)
+          format: 'image/jpeg',
+          transparent: true,
+          version: '1.3.0', //wms version (ver get capabilities)
+          attribution:
+            'PNOA WMS. Cedido por © Instituto Geográfico Nacional de España',
+        },
+      );
+      var ignmapa = L.tileLayer.wms(
+        'https://www.ign.es/wms-inspire/mapa-raster?SERVICE=WMS&',
+        {
+          layers: 'mtn_rasterizado', //nombre de la capa (ver get capabilities)
+          format: 'image/jpeg',
+          transparent: true,
+          version: '1.3.0', //wms version (ver get capabilities)
+          attribution:
+            'PNOA WMS. Cedido por © Instituto Geográfico Nacional de España',
+        },
+      );
+      var geoeuskadiorto = L.tileLayer.wms(
+        'https://www.geo.euskadi.eus/WMS_ORTOARGAZKIAK&',
+        {
+          layers: 'ORTO_EGUNERATUENA_MAS_ACTUALIZADA', //nombre de la capa (ver get capabilities)
+          format: 'image/png',
+          transparent: true,
+          version: '1.3.0', //wms version (ver get capabilities)
+          attribution:
+            'geoEuskadi WMS. Cedido por © Eusko Jaurlaritza / Gobiero Vasco. geoEuskadi',
+        },
+      );
+
+      //L.marker([42.883, -1.93]).addTo(map);
+      var map = L.map('mapid', {
+        center: [42.883, -1.93],
+        zoom: 9,
+        layers: [osm],
+      });
+      var osmMaps = {
+        'IGN (orto)': ignorto,
+        'IGN (mapa)': ignmapa,
+        'GeoEuskadi (orto)': geoeuskadiorto,
+        'OpenStreetMap (euskaraz)': osm,
+        OpenStreetMap: osm_orig,
+      };
+      var ignMaps = {};
+      L.control.layers(osmMaps, ignMaps).addTo(map);
+      var encoded_url = 'ehmuga-array.json';
+      const response = fetch(encoded_url);
+      response.then((data) => {
+        data.json().then((latlngs) => {
+          var polyline = L.polyline(latlngs, { color: '#3381c2' }).addTo(map);
+          map.fitBounds(polyline.getBounds());
+        });
+      });
+    </script>
+  </body>
+</html>

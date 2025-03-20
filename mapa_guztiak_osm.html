@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="eu">
+  <head>
+    <title>Euskal Herriko mapa OpenStreetMap mapetan</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <link
+      rel="stylesheet"
+      id="leaflet-css-css"
+      href="https://unpkg.com/leaflet@1.3.4/dist/leaflet.css?ver=7a82077d7cc248014014b0a28d320683"
+      type="text/css"
+      media="all"
+    />
+
+    <script
+      src="https://unpkg.com/leaflet@1.3.4/dist/leaflet.js?ver=7a82077d7cc248014014b0a28d320683"
+      id="leaflet-js-js"
+    ></script>
+  </head>
+  <body>
+    <div id="mapid" style="width: 800px; height: 600px"></div>
+    <div id="areas">
+      <input
+        type="checkbox"
+        value="eh"
+        name="eh"
+        id="eh"
+        checked="checked"
+        onclick="javascript:show_polygons('eh');"
+      /><label for="eh">Euskal Herria</label><br />
+      <input
+        type="checkbox"
+        value="na"
+        name="na"
+        id="na"
+        checked="checked"
+        onclick="javascript:show_polygons('na');"
+      /><label for="na">Nafarroa Garaia</label> <br />
+      <input
+        type="checkbox"
+        value="eae"
+        name="eae"
+        id="eae"
+        checked="checked"
+        onclick="javascript:show_polygons('eae');"
+      /><label for="eae">EAE</label> <br />
+      <input
+        type="checkbox"
+        value="ipa"
+        name="ipa"
+        id="ipa"
+        checked="checked"
+        onclick="javascript:show_polygons('ipa');"
+      /><label for="ipa">Iparraldea</label> <br />
+      <input
+        type="checkbox"
+        value="la"
+        name="la"
+        id="la"
+        checked="checked"
+        onclick="javascript:show_polygons('la');"
+      /><label for="la">Lapurdi</label> <br />
+      <input
+        type="checkbox"
+        value="bi"
+        name="bi"
+        id="bi"
+        checked="checked"
+        onclick="javascript:show_polygons('bi');"
+      /><label for="bi">Bizkaia</label> <br />
+      <input
+        type="checkbox"
+        value="gi"
+        name="gi"
+        id="gi"
+        checked="checked"
+        onclick="javascript:show_polygons('gi');"
+      /><label for="gi">Gipuzkoa</label> <br />
+      <input
+        type="checkbox"
+        value="ar"
+        name="ar"
+        id="ar"
+        checked="checked"
+        onclick="javascript:show_polygons('ar');"
+      /><label for="ar">Araba</label> <br />
+      <input
+        type="checkbox"
+        value="zu"
+        name="zu"
+        id="zu"
+        checked="checked"
+        onclick="javascript:show_polygons('zu');"
+      /><label for="zu">Zuberoa</label> <br />
+      <input
+        type="checkbox"
+        value="nb"
+        name="nb"
+        id="nb"
+        checked="checked"
+        onclick="javascript:show_polygons('nb');"
+      /><label for="nb">Nafarroa Beherea</label> <br />
+    </div>
+
+    <script>
+      let map = null;
+      let eh_polygon = null;
+      let na_polygon = null;
+      let eae_polygon = null;
+      let ipa_polygon = null;
+      let la_polygon = null;
+      let nb_polygon = null;
+      let zu_polygon = null;
+      let gi_polygon = null;
+      let bi_polygon = null;
+      let ar_polygon = null;
+      var osm = L.tileLayer(
+        'https://tile.openstreetmap.bzh/eu/{z}/{x}/{y}.png',
+        {
+          attribution:
+            '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors. Euskarazko mapa: OpenStreetMap.fr',
+        },
+      );
+
+      var osm_orig = L.tileLayer(
+        'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
+        {
+          attribution:
+            '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+        },
+      );
+      // IGN ES
+      var ignorto = L.tileLayer.wms(
+        'https://www.ign.es/wms-inspire/pnoa-ma?SERVICE=WMS&',
+        {
+          layers: 'OI.OrthoimageCoverage', //nombre de la capa (ver get capabilities)
+          format: 'image/jpeg',
+          transparent: true,
+          version: '1.3.0', //wms version (ver get capabilities)
+          attribution:
+            'PNOA WMS. Cedido por © Instituto Geográfico Nacional de España',
+        },
+      );
+      var ignmapa = L.tileLayer.wms(
+        'https://www.ign.es/wms-inspire/mapa-raster?SERVICE=WMS&',
+        {
+          layers: 'mtn_rasterizado', //nombre de la capa (ver get capabilities)
+          format: 'image/jpeg',
+          transparent: true,
+          version: '1.3.0', //wms version (ver get capabilities)
+          attribution:
+            'PNOA WMS. Cedido por © Instituto Geográfico Nacional de España',
+        },
+      );
+      var geoeuskadiorto = L.tileLayer.wms(
+        'https://www.geo.euskadi.eus/WMS_ORTOARGAZKIAK&',
+        {
+          layers: 'ORTO_EGUNERATUENA_MAS_ACTUALIZADA', //nombre de la capa (ver get capabilities)
+          format: 'image/png',
+          transparent: true,
+          version: '1.3.0', //wms version (ver get capabilities)
+          attribution:
+            'geoEuskadi WMS. Cedido por © Eusko Jaurlaritza / Gobiero Vasco. geoEuskadi',
+        },
+      );
+
+      //L.marker([42.883, -1.93]).addTo(map);
+      map = L.map('mapid', {
+        center: [42.883, -1.93],
+        zoom: 9,
+        layers: [osm],
+      });
+      var osmMaps = {
+        'IGN (orto)': ignorto,
+        'IGN (mapa)': ignmapa,
+        'GeoEuskadi (orto)': geoeuskadiorto,
+        'OpenStreetMap (euskaraz)': osm,
+        OpenStreetMap: osm_orig,
+      };
+      var ignMaps = {};
+      L.control.layers(osmMaps, ignMaps).addTo(map);
+
+      let polygons = {};
+
+      function init_polygon(filename, color, name) {
+        const response = fetch(filename);
+        return response.then((data) => {
+          data.json().then((latlngs) => {
+            let polygon = L.polygon(latlngs, { color: color }).addTo(map);
+            map.fitBounds(polygon.getBounds());
+            polygons[name] = polygon;
+          });
+        });
+      }
+
+      init_polygon('ehmuga.json', '#0000FF', 'eh');
+      init_polygon('nafarroa.json', '#00FF00', 'na');
+      init_polygon('eae.json', '#FF0000', 'eae');
+      init_polygon('iparraldea.json', '#0000cc', 'ipa');
+      init_polygon('bizkaia.json', '#33CC33', 'bi');
+      init_polygon('gipuzkoa.json', '#66FF66', 'gi');
+      init_polygon('araba.json', '#AAFFAA', 'ar');
+      init_polygon('lapurdi.json', '#CCFFCC', 'la');
+      init_polygon('zuberoa.json', '#44FF44', 'zu');
+      init_polygon('nb.json', '#77FF77', 'nb');
+
+      function gei(id) {
+        return document.getElementById(id);
+      }
+
+      function show_polygons(name) {
+        if (gei(name).checked == true) {
+          map.addLayer(polygons[name]);
+        } else {
+          map.removeLayer(polygons[name]);
+        }
+      }
+    </script>
+  </body>
+</html>
