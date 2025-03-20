@@ -87,7 +87,7 @@
       };
       var ignMaps = {};
       L.control.layers(osmMaps, ignMaps).addTo(map);
-      var encoded_url = 'ehmuga-array.json';
+      var encoded_url = 'ehmuga.json';
       const response = fetch(encoded_url);
       response.then((data) => {
         data.json().then((latlngs) => {
