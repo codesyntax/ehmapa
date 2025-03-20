@@ -2,24 +2,25 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="eu" lang="eu">
   <head>
     <title>Euskal Herriko mapa Google Mapsetan</title>
-    <meta http-equiv="content-type" content="text/html; charset=iso-8859-1" />
-    <style type="text/css">
-      v\:* {
-        behavior: url(#default#VML);
-      }
-    </style>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
     <script
-      src="http://maps.google.com/maps?file=api&amp;v=2.x&amp;key=AIzaSyC0yUey9xn5usDxiGm91AReCo0az7K_5BM"
-      type="text/javascript"
+      async
+      defer
+      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC0yUey9xn5usDxiGm91AReCo0az7K_5BM&libraries=geometry&callback=initMap"
     ></script>
 
     <script type="text/javascript">
-      var map = null;
-      var eh_polygon = null;
-      var na_polygon = null;
-      var eae_polygon = null;
-      var ipa_polygon = null;
-      var la_polygon = null;
+      let map = null;
+      let eh_polygon = null;
+      let na_polygon = null;
+      let eae_polygon = null;
+      let ipa_polygon = null;
+      let la_polygon = null;
+      let nb_polygon = null;
+      let zu_polygon = null;
+      let gi_polygon = null;
+      let bi_polygon = null;
+      let ar_polygon = null;
 
       na_points =
         'ssibGvwwMa[~EmLNqWtHmJ`@ap@jDaJaGaJq]sKwXwCw_@kAmeB_e@hCe^bWcFpGqb@`@eUdP{HcAqBgBaW?iXae@cFq]}b@rA_PPcWr@uGfJmLxCmYlEe`@dAy]~FiXbHkPhCwA`OqDOgVaGcFa@cF?}ByCiE}DiEOwEgBuG`@?vIXdPp@zKwClc@pBwB}@lLwCbAcD|DkCdBoD`GiGfJ_LbOaJdBYpNjCrOnD`GzFdIhXNnFrVnf@~T|^hYve@rWj_@`N|q@nr@eMnF_RhRsIgB{WlSsMgBa[fQgI`@}Dv_@p@~FuEhYp@tcAjCpVpQpNwRbAq`Aza@iGfBgK`@eOnFsIpGoYwBeO`NkN{Cp@sHjC_NjAePvAiKbDwIpB}L?kKeMsOeDcHr@eIwCsHkPmEcFyCeK{CoHmEiVqVK{K?wPiCgCeDcHiCdB{FuA{HiDqBiJwCeBuGs@iEiC{FgCiGcHd@}LgGiJeOgC_PoFoFqFmHiRaJuPsIc^oFiRwE_NcDeIwAiCmHmEaHtAYyCK_NoF{CwCaHuEePYePXq]?_FVeXpBuAcB{KlHuPaHiYVkSdDqNkA{D~Mq]_CgBbFiK~KwXrK}S`HwInF{DxAbH`HxJzHvQbDuHpBmE?kLJcOnFaH|BmEjNNxLzKlLlEd@cHp@}EKcHM}LLiJ{HgC?iJd@kLvAgJnDcOvEuPV}DuC}E?qNe@eIbBeIvEcH?_NsOe_@yLePiEgJoFQoF_FoDeBwCqG?qFcBq@kCiCXqNcDoFd@uAYsHsKqUKiCiGiKq@kDiEqGJuP{F_FYcH~@uAq@cHhEkx@aH|EvAeIMsHLwQ}DwImYwIuVdAgTiJoF~EoHtAaJvBkLlEoHzDmFfBuIvB{HhCvEfCnFzKlHjKhGrHzFrOiR`]hA`Gwh@dIyA|EsGzKiEbHgImEcHeIsGcHmh@~E?aGwN{DaU`HgK`G_NmEaH?sGgJoFQ}B~E}DbAgV~[wA}DyYlL`JzKkA`GvAxCuEnFaJnF{FoFKnFcSr@{DwQhAgBsc@oF}BiCoDhCsIkDaHwBkAoM}D}EJ_Fr@qGqByJbBoMq@}LcDsHXqF_AgJwAkSnDbHc@oF_CaGq@aOmHmS|BwBiCuPiGyJsIaOJ{KcBoc@oGwc@wAuEuDaGiElEk@sDiCo`@qBc@kBz@iPvXcOq@_r@~Q_MrDmHhJyK`DgJ|A_IOwD`@gFrDuEtAiEfBiC?mIFwEvF{CdIgImIuQ{D{GdTgJuA{FgMiDyGmHsDaQwXeOk@g_@lIcj@b@cZ}OcNuj@gHuSwCyGueBm~B{v@qRqLjDcB}Dsb@|LwKPmT~EaRxNiPlEcD{@gaAtAeJs@{PFog@lAuZhl@qLl[eKyCcD{G_IcLbCwTfFaa@}@_GycCcDwYtEkTyGgGjAeL}EiY}SsHaa@}Aw\\d@gMqWc^{PfBoOYiCeIiBoFgFgM}XqCv@qRK}[uEyMuBeI~Hm_@pA}E~HsKzCxCnFsHnBqFvA{H|X_UfPaR~KzD_@{yAyIwXiNoQ_SiNpJwr@^yQwBgJbBwFX{G|AmLpAqG|@_JWcAwBjAeAuAvDse@zBcEKoBsIiCiAmMsJuH}@}^sGq]{Qyh@oB}OoQcA{E~IgF?iBk@_JmEuDkH_JgNw@aCcCeBk@`@aF}Dic@aHiYoBuEyC?{NgFqGgG}LDcOq@eB}AaGYqC?eIK}HoBkHVsHKw[dA}[s@maBuW?zCgU^wI|@iNiM{i@{Pk@cM~AwJ{VyRaVuDs@c`@k@GoFwIqGm\\dMe_@jOgDrDgGfFw@Qk@nBiDrDiClEyI|HgG`CaC`@kC}AaE}@}BlA{BvB}AdAcCh@_APcArA}AWgGuAmEIqAcAwCs@oAlAoDxCcCFsGHuDrDkKodAi`@wFyRuWiK`@yH}HiDgCcAyC}AyF_@_C}BiCk@`@uDa@sFiC_J_CaE_C_Hz@gFjAeJtAmFH{Ec@qAj@gDlEeAdBoCtAaDa@cEGwIzDe@dAcA?wB`@KjAqAzCkAh@}AnBWs@}AaDqA_F_@kDiAqCS{DiAaG\\yAr@aBkA_B}AgCuCyFy@GaCa@cD{@gF_FiCqC}@kHScHq@qC}@iGoCgQiDqGaXkqA`FuEqIsS{Gki@sEqUqAsDWeEyIyGmb@nJeA_CgDsKqA}AcB}AoDoF{BgF}B{Gw@mEYqG_@iCFyC?yCYaCwAiG}@kH_@sDd@iCQwBeBoJi@{@?_Jb@gBRYV}A?cAe@gBKwBJs@LkASeAw@wB_@sDoBz@}A|AwA~AqAh@cAs@?gCKaC_@i@oB`@kAi@wAaGwA{@_HoFw@wEP_GsE_QwA}AcDmAiB_CcBFiB`GwBtAcCk@]yCkAsDsFa]{DqGwJs@KuLe@_NaNePuLwJ_IqFaGdE{D`@sE}AmFuE{E_J{MkHiCqCiA{CqA_J}IaOuDgFuNw\\k@sGkHiKeHGoCeAcLb@gGh@mDlAuD|AiC`D{ExFsDpGy@lEsDvXeJ~_@gFxJkG`GwBQiBPuDz@_G?kIQoLeBk@NsEaGiE{DgEs@eGeBoCiCoDs@qJpCeOnBoEbLgExFgDfCgG~AkH`@{Ez@eF~B}Cr@oLGiBs@}A?mEwBsE{@iMnB_FVcBcAkB}AqRyYmDcD_HoF_GeBoEs@yEFcCcAaDa@yFgB}BwB_OqGoDYiC?cC{@aCtAcC|AgE?sEPeHvFiCh@wJi@aN}A}I{@sE`@_HpCoKh@e@q@qAmAuA|AiDhN{Bh@kBuEsDmAoCmBq@wEcCwBmDqCy@mE~@aDdF{CrFmBfFp@nBbDRdElEbAtDoBhAmEjAmIJgF?uEv@mEbBaCbB}AtE`@v@dE?hK\\|Dd@vBv@h@pA}A`EqNzBoBzEwBfFr@p@QzCaDj@wB?_FPkHvAiGpAmIzA}Dj@cEKaCcAiCw@gCMsDdAgBlF`@tA{@|C{DnAwBq@gBiBYiCG{BPqAuAcCmAuBs@{D?wAr@oC`CcBh@{CQe@cELaGzBgFzDeElF{D`E_C~FN~FGnD_CtByBQwBoB{@oC?oCnBaG|AgEG{CuAcAaD\\cD|AsDhBuE|AcD~@kDj@yCeA_CmD?{FQuBbAW`GMxFmEmAaEaG_Gq@wBnChDzCxGfCnCbDq@`GcCIgEuEcDj@cBdFuA~AqAoBY}HcAgFhBsHE{C_GeFaDvB|@~FYhGc@vIb@bHoAr@aEmAyF_N}Br@iBbEgDvB{EkAoBs@}AmEcBh@q@nIaE|AaEi@k@gFwAmEmEmA{BuElDyCR{CvGcHrGkA~FuAcAgFqI{GcCyCe@cHvBoF|Hi@tKQlFeItC`DtDqClGcApFlE`EnBrGGnCcHfD_FfFqCdHj@tD|AhCqCj@_FkAuEcBoBuC?oDtAsEG{CXoDFiBQ_@cAXaD?yBe@wB]gC|@a@v@|Aj@nB\\vBdAh@p@}ADeEEoBbCcEp@aC?gCwA{CoBa@oCz@qAvBkA`CiAxGeAtAcAeBwAaG~@_CzB{Cd@kAwAgBoC}AoBj@iDp@cBq@uB{Cq@mEaDyC}Cr@oBjDaDrD{CXuEiCaDkHcBk@qAuA^_CfDiC|CvBbA`CjH{@hDoFnAsGcAyCiD_CuAkDhB}Hd@eEtBgFgFyNmDeM|AgBjF{@d@qCw@wBcCH_GbEuBs@wBlAuClAwAoBiAiCbBkDzDwB|@yCsGaG{AcAhA{Dj@qCbBsDWyMk@j@sFiGiB{@_AcDoBuAcCq@iBp@{CHXqCoE{@uB`@{Cz@}BPiAmAeAoB{CeB^qC{CoBkBa@w@k@q@?k@s@p@}EbBuAdA}AkAoBgCa@h@cDjAcEe@cDwAqG?}DK{HKiNaDuEwAiCoLmEoJk@w@uEqAoJ|@mEw@cHq@_J{ByCq@_FmG_FgLtD}AFkQnBmMuLuT~BgGYgEhCuCtA}IXoB{@DsDiRqNsGs@kPrKmDFuTdEgFiJcA}EwAaGgCaK}CeIqFoBcDmEgLeEiK_GaEzDvAoXqGuIkAsh@hBkSjAmEtBaDhCaCVsD?yCw@wBaEmAoA}Ee@gF{CqC}A|AE~EcBFPeEe@iGcBuAc@yCDuE_@iCKqCj@i@v@Yp@`@d@QbBmEeAaDuCyFiBqC{Bb@q@qC}@k@wAi@qAuAWiCSyCLwBYkDq@}Av@oFe@wBgCuDoBiDzAgB^eEpA_CcCmA}Aa@cAs@iC?k@q@D}A^qC_@gBv@a@~@Yb@`@Ri@E{@VoBp@yC?eAw@q@WiCMqCbB{@pBoB?wBb@qCc@{DnB}DPuE_FbA_HzCDYgEuHgLyJaFgJsEaOe@}SLiRqBoFuJmLoRwQgWeWgCaHkAwIWw_@?cH|P}q@}@wQsE}De@kDbBeI{D{SgC}ScTe_@zDuWp@cH|@gYjAoMtCsO`KsG`MiZvHwX?}D{BqGVeIeGq]hC_M|GaOKkSxFoMzDmEdG_F~GgCdGQrEhC`MdPrEQdGrHLtAnBOnIdBjH?zD|DnDvB~Es@zTzDlFmExDyCpYqGbRuAfEa@zDr@nK_UnBc@~Wa@rGeBrWqUbRcHpPgY|@{RfPuIq@ePgEmL{DkSwAkDVmT~@oFYqGnBmLdBqNY}E|@iCXiChCkD?gC}BwIiAmLfCyC`F}L`DQhC_GVuHoBr@wAs@iAs@mFiKeO}Pws@{VePqJ_GGaFqCkHeAuBoF{EuAcB_CgE}AmEr@sEs@}AeEcBeEmFcAgEmAyDmBqIhG_FtA}BdBeGnBq@pCP`Gc@lEkB`DmEnBeG`@}AbA_N{i@?gBiB{DmEk^\\qYiB{OKcDbA}HKsDp@uLYyGcJePW{DnAcHRgdAe@kLQ}LoByQ`CqVP_XxG}LnKoF`DXjHgJj@kKbCaD`D?hBNlEoJv@YvAXvAs@MuAXuA|@}ApA{@zCsKv@i@fDYKyC?sD}AsKDyC}@a@WoBkBeAiAmE}AcEKiC_@{DdAwB~Fc@|HyG`L}LhBwEXeBvAuAp@wBb@s@K}A|@}DFmBtAmE|B_Jd@eAfCkAd@mAPwBbB}ARuAYoBRkAfCkGj@yC?mERqCfC{KLsD_@oFPqCRwF?aGDoFp@oFDqCtBiC|B{GV_GRaC|@aDj@eLdF}W^uEbByFtCyGiAibAoKse@qAeEiTyYaCyNPyFbB_J|BsS|@uAhA}AjAuA|A}AhBaClEoMxMuE~@yGe@gFdj@g}@vYcW`DmErFuLjA{@xDgBtT{@di@{K~IyCtJs@pR}ErD`KbC?~GmL|Jr@fCbA`Fj@`DnBfGvBbBnBp@fJ`UtLzEh@dGwBrF{@pRqJfC{D|AwFbCdBvAnFtCjDrEtH`FnCzMPrVcLjY}AjIvJdH~EtEhCdFXrGmAtCs@~OiVpI|A|ClEbA|SzCrShCzK~FxNdRx\\lG~BxFdI\\fBfG|A~Fk@lFnBhK`@zEvBrMkAr@r@zU{@vQrDlHNzAY|AHzDqCjIqCdHz@jBr@j@fCJ~Ew@lEb@vFEnB^z@hCr@|@vBQ`@bB~Bj@jDv@|DvAjAlE`@dAHnChGtB~BbAhC~@`@hBFzDgCrEgBpJsH~FiJhL}EfGjLnLpClF|HtC|AlGr@hUtArEuA|BFjAj@~EvIdA~FnLfX^dQhL|HvJtApHYrOpCnEvIzD`RdInYlDnI|AtL?rDj@jH|AXtDk@fOoFfEzNbDrLnDbK~E|TfGlAhCPnBrDzEjL|@hGtCzGjA`ODfFtDpNxZv_@fFtEj[|L|BnBrGz@|SyCnFoB`CcAjg@sZzC}HhX_YbWePrNqNrGaG`e@u_@hVqU`FgFfOmMvKeTVaC|CoJv@cObCgNj@iCv@kShMqz@zD}b@fFw_@jAaH|@sG|AaKtPgwAlE}HbBcWXqNbAuLnNgeAzDaa@tFqd@YYPoB~@{DiL{@_BeBaEeAqK}AqJ}A}_@aKyEc@oE_C}@eBeSkK_Ia@{NkHe^kDcBz@q@a@_@NmEr@oOzGeG{@aF{@aaAdBmNeM{DmAk@P_@YmF~BeIyCmGiGaOrOak@~TcWqG}HkOaH}Hc@oBwBoBcKgCwA}A}@}DkBsKoC_GoBuAyIGwIs@sGcD}AeTeG_NuDoFiBiGe@QqBsDiBiCoCoJkAwMXiCq@yNVsDi@eE?yCP}A_@aCcAaDwAgBw@eIcBoMViDe@gFdAyJkA}D?eFq@mHWeMDiC_AoJx@cD|@qC}@_NkAyFqAqCKoF{EcE?eLLcEqB{CcAmIe@cHp@_FiAyRVqCKwIp@yGfYlf@zKlM`PnQlFhChBj@j@p@d@YlE~L|AbAbCz@bCGd@p@?lEV~A?fCD|Aj@dAbDr@fDlBhCi@jArD|BhCDdB?tAP|ArF?zDlEvLjHpA|@b@p@iAlAJdBbBnBlFlAvAfCtEhCv@bDbANjAkAVeAhNjKhCk@vA?|@r@QlA|@jAvAGp@YzCFp@YjAr@Dz@jApCbA`@|Ba@p@z@?z@^~A|@FfE_F|CGrEpCR`Dv@X|@YjAHbCmAhA{@pBQdI~A|A|AbBr@hA?x@xCtC`@|@`@zD~EpAr@|@?bENtB{@~@`@|@z@^lAv@`@\\tA^Yp@_CRmAzDuLSgCp@cHLaRb@wB?uAdAaKbAiGjAmAzCeBrGqCd@?p@cDD{@c@eB?_Bb@mB?gBjAcHJ_Ck@_FDkAKa@jAyF`DeB|CmHd@gCDwBnAsD|CqFtB_CvCoFlD}D~@eBfDuL`GqGj@wBDgFDoB?iC]a@tB{DnEkDxG_C`DgBjBFhBY`FuItD}D|IaDtFmA`Es@p@_GWwB?yF|@iGJwFQgB?aDd@kD`DoMv@{Rc@kLe@mADuAg[al@{Xk^sZ}b@PoF~@mE|AkDzC_RdAeLlNkx@dBsD|KiRhVg\\pSqd@f[yo@hWej@zDyGcLih@yQ_B?eB|@mEvAmAjAcE|@wIzDwQPoI|AwFhDkDdA}D|@sAnE_Bv@GhA{@d@mEd@wB|AgBX}ADoB`DeFdAoBpAeLVkAnCuA~@cAvAmHzCsHKeEhCuAJeBp@eAp@q@?eAoAwBv@a@tB?vCyCeAsDtF|AdHGtEY|ANpKuAbAa@fHX`Dr@tD?vBa@hAIzEoCfPwExHat@]_B}LkHcCsDk@cAKuAk@}AgGyFuDmEe@mAQ}Av@gQ?}AiD_CRcDcEcA{BwB{GaGsPaRqLeIkGmIs@yCj@{CvByChBi@hM~BjBOzE}HlEmE~JiRzBkHlGaRlGyUtDwM|CwQhAsKEmE}@kH?oFhAmLdBnBhAz@jKrDvAz@pAbADcAp@Yj@kAvAeAzEPd@a@zBFpAvBjAz@nBpC~@s@PcAEsDvA_F^eB?gF\\{@bC}A^{@JeA}@_C_AmALkA|A{@hBoBX}A?cD|A{DPcDd@cA|BeAVmBQmAJ}AReAnAOd@s@JmEj@kD]eB?iC|@}EX{Ce@{DhA_Jc@qCJuA^{@vAmAhBoQp@sDcA_N_BsGFmBy@mED}Ax@oBJmA^oJj@uA\\a]pBoFKeIDoBk@wBJa@dAwBJ_B_@_Cd@eBXcDG}Ap@uAjAGhC`@iAeEeA{@PyC?iCQuEPoBbCcH~@a@hAoBx@cA|@oIjAqGj@sHYsDcAyFs@oFoB}D?_CcBcLE{@|AaGj@oBJ_NhDsODkDlH}L|I_NhCY|DeAhB{@tD?vk@aa@rGoBlFsDnDiD|BuHvA_JnDeTpAy`@|AmMvLio@hMvInOq]dRc@vCoQhCuIJePe@sK?uEXkDbCyJDmEv@mEjJyY`GiN`HiOfFwE|AiDd@gFPaGiA_JSmE?yCdA{GDoFtC{OQwBwCoIWoFJiGk@mAWyCMwMoD_Nq@oFk@oBpA_JtC}i@`Fqa@mQa~@pBmAbAeIE_G}@aGcBct@tCoQhB??{O]gF}BkKhMm_@bCaGxIy]_@kHDeIW_FiCsV}BaKuFajA]kOGyJ{By`@_K}`AoPaN{E}[r@gMo[yo@aPyNzFmlBbBuEuC}HmRkSiCuPDmb@eB{a@R{VrFiVtG}D~QoQ`RsDrPsDrRoJrSoTdUm_@rSyaAva@rVtFkSva@dP`ReEhBFv@j@jB?zCuA~IeLvAcL^YhBGx@iChAyCpBwB|B?zCgJvBjDdAp@|A?pIdPzG|LzFfBiEnr@{\\nr@cB~\\lHtcAfEvXr@pnBxQ|i@zQiC~Tvg@~IqGz\\j_A~T`{@deBqGhf@hClSsGlShRvYcAlH`{@dn@trAdy@cAp@vXhPzKcBxv@|}@tItNdAdc@aNxd@vI|g@mT`k@sGvYdPdM`]dXeAn^ip@|g@sVzQhRxd@pGl|@`l@wCdPdXvI`JiCpKlc@dMre@aUfn@{FnaA|Q`l@jq@?xYwIn^cAiEduCfXrGn^j_Adv@zZ`Uvg@|\\dAnSzK|QfCaJja@rKrt@xYd_@jPhCs@naAnHhp@rKj_AbB|x@{Ftt@?zi@zFre@|Q?hPrV|F|i@tl@?p|@ka@lf@zKfc@nTnoAePbU~MlH|i@xY|i@uC|gAbBha@hEhR_]flAq@vg@iE|x@rKztA{Fd}@p@|ZkPbwBhEfn@`fAfCtVgCnoAzK|o@bAm[trA?|i@l[~MhXcAjPyv@hc@oaA|Q~MiEvg@rKvX|Q`]`]f}@|QzKdBlTb`@bP?nc@fk@lTxrAcAp^wXvVhRoHlT`JlnAbh@`l@?lT_RlT|FrGeUpV}QtcAgMre@yNpG?fn@bh@lc@jc@rGdwBxcBd`@cApf@d_@tVoc@b{@hCq@wg@xNka@py@mEd`@_NnaA`]hXhRpSlE~Qlc@`]`]tKvv@lc@l}Axa@nc@dh@d_@liAbyAjqAbAzgAvg@pn@zKhfAxg@hEbP`e@wXlP{ZsSkp@|Fwg@|YiRp[wIzN{K`J`NxViRjXlTlPlTnHvIlPdP|YflAhrDnhDtf@hR|YvX`RvX|a@|x@|YsVr[_NrSePlPcPd]lThMlTxV{K~t@xg@js@{Kt_C`jAfUzZv^zKpc@vIzVwIv^mEtSmTzN{ZtSsVd]st@~a@_N~YsG`ZlEtSzKd]qGtSzKhp@lThMiRs@uIbRbAfUcAx^bPjh@dAxf@pVf]{KhMmc@jEiRlcAm}AzNe_@vKiRhx@mE`b@cA~a@e_@b}@}i@nPcAvKoT~Fe_@kMor@wCwv@?oT|FqVkEoc@xCiRvn@vIpP{KpHwIf]{KzViRt[`]nXePzf@|x@t[nr@fe@nc@ps@naA`b@hRh`BppAnsAnaAtk@dPlx@d_@nXfCbb@paAbRa]pPmEjUbAbZhCpH`l@n`@taBjMuIbZtXvc@zKbZhRdRd_@|NvIxCjp@yKrt@wKrVdBzi@eBd_@eB|i@q`@|x@cRjp@~F`jAdBl}Azn@dP~FpVpH|i@jU`l@yCrt@?lTwKxg@kEvv@kMlnA_Gre@qHre@qP~\\sHpUW~MsLvXiMjSeFvXeZdP{f@`]kUdQi]dPcNbOkM~\\qHf`@VdP}FdPmAbPcJb^eFvXeBbOeJ~MkExJ_KrHqDhReB`NdFjSpH|LjMcAp@vJkA~L}JnFyCpGeFxJYrH}N`]?tH~FdBpDdBxGeBjGdB|D`G_AfBKxCjEa@xAfCpDr@~BxCvElEdDa@r@wBjCdAdBlE~DdIe@vBpDfCdBjDlCPY|E_C|D_CwBeBbAeBlEyAlEKjD_AvIdBzD_CrH~B`NpH`O}VtWr@zZXpd@eNrV?xJqHvXkMvv@kItHeBpGwKzKyGhRoX|LwOjS}Rd_@}V`Nsk@zi@wSnT}NzKjAfQqDnUbNd_@vSjp@eBvJ|FfQiQ|i@wSha@kI|ZwCtIvClb@jInUeFvXdFzKr@|i@_GdPwOzKkI`OoT|LqDfQeN~MxCnF~BjDvGeBnTtf@_z@tf@aVxYhMbOXlTeJnF}JnFcR|ZiQtIeBzK_GjDcNgCkE|[jEzw@}N~MqHfQwOnFcRqGwC~McmAqG{VlE{^jb@wKiRyn@`@}JoFkEaOaR?yC{KkIdBcJqG{RmTu[kSqD_MufAglAq@_N}NaOwKcOuSuWeB{KuO{Kyb@gQwGqVqLePix@knAaNeP{VkDkErGkEgB{ZeBs[uHgY}[{Roc@cFyYtn@cvB`^iRnH}x@vOcm@_G_NmTa@iQ{w@kh@_k@|FchBdJm`Aj`@st@tz@or@u[o`AyV}j@oPc^iUse@iIoc@qLe_@mXzh@uK|j@wj@nTs[bPm`@?{m@kb@kh@g{AyVjSeFhR~FbPmA|ZXbPkAfQbNxJyCjSmTfBiQa@eYhRcJqFaVdAuKlT?fQ_GzZiExJ?rVkIbPvKtHcJjSwCxJkEvXpDbPtOzKy}@fuCr[rHnPzKp@nT{JbPuWzKai@re@jApUtO~MbFjb@Yre@aNhRoL~L?dQkAvXeBvXuKdPaVtHuOqFyVsHk`@a@iMfCqDxJr@`N|]|[{J~MaRvXcJnc@{NpGiMvXmTzKwCzKVrG|FlExCfCpDeBpDfCbFiDjEfC|FeBbJtIeBnr@?nc@}JzZiMdPaNtHuKyJgY}ZwZoUca@{KyVxJsWsG}a@fQkAvIvG~j@iItf@wKlq@gM|LwGvX_V`{@eYdn@mPse@{N}LgQ?aNbOiI~\\jA`NqDtIgUvIiEwI{NuI}]eA{JrVp@re@hEjDjEcAvGfCtGeBnLhRoHbP{NvIw^jSyRbO{JjDeB`Op@rVqD|j@~BfQnHjS?tWiIbOyRpGmTyYuGdBkX~[gQwIsO`N_C~M`NxJzJbPiEdP{JhC}JmEmPtW}Ff`@sKlTiIhC}JzZvGfQtKnU?`NuK|LsSrHmPvIq@dPvCzi@lPbOtKjSjAxY`JhRxC`]nDnUjAzKvGjDbFeBvGtIh\\lb@`Ntu@fQ~[lPrWiI|i@qDf`@aJ`l@aR`@wm@dAc]g`@{NqUyVyJqSb^}FlT{NvXqSsH}F?aR}La]nr@YzKaa@bkAgMeBaRre@aJdB_VkS}F{KeQgC{NoTg`@_NoHlTaNnTbFhRoDzi@_CtWnHxJiEfQqDtIwCrVbFzK?zKjX~j@Y|L{JfBY~MnHtW|YjDfQ|LnHha@Xtf@jAb^aNhRyRlE_V|LoHfQr@nc@cF|[|BhRxRhRhEbm@cFpd@wVkSp@qG_NdB{NpUuGtf@jAhp@}Fre@kTlb@a]kSiIiCwCmE_V~MwCtW{YvdAiI|[uKb^?vIvVdPnH~MkAjS{F`O{NrGg\\`@{NvIuGvXeQ`OqSlEqWlEeB`]cBbPpSxJlLuI~QcObFpGnHfQuGvXgMtWcFrVbBtWiE|[wR~[aNnUiEjSfMtWnHlTtVcPrS_M`]jDvC|i@bFpd@oH`OgMeBqSpG_RzKmLkDcJtHwChRiE|L~QxJlL~MdBfQqDvX_NjS{Na@_NzKwCrVjAdn@qDd_@sKd_@VlTbFxJiz@fo@sStWuZnr@';
@@ -72,289 +73,108 @@
         'PEDGBEHEGDDCIFDHEDJEGFFGGIEGEIDIFEEHJGGHHFGG@JFFFBG@IBFHFIEEHCGIEGIGCDJHCHCEHDDGFGGEDMEDBBDBE@B@GCBFCFCCICDCB?DFDD@CAFADAC?DHCICC@FBBDBCBADHECBEBE@CCDDBDBDAD@DACCAFBAEBCCICBDCCBGFHBABECAGCBCBIEBDHBBDDADAACCBCI@BEBEBCBECHB??CFCBDBABEBACDFCAADABACBCAFACAFAAADBBEA@KCBBCAEC@EBDADCBCFDCACBFCDEDCFABDCDBCEBBAECCDBEEBCHCCDCECCE?CDEA?DCEDBFB?AABFCAEECBADECKBBDCEADDAEDCBFD@DBABBCDCBEADCAEABBBBCHCABCCBEGDBDFCAECCEBCJGEGCEDBAEGD@FC@CCHEDDCCECC?DCDKBBBBCDBBEEC?@ACCDC@CDBIEB@BC@DEDEN@CDGCEBHDBDCFAEAFCB@GDBGBBECBCGCCEGECCIBDDAFCDEHDCDBCHBBCE?CE?CBBDFBACCDCHECCBFCECCEDCDCIBDECFBDDKEE@GCDCGEDGDBCCGCECBHCECFBDBBGFDFCCCDIADBDEECEED@?@AKFEHFFGECEIFGFGIFFKFHDFFCACIEAHEEIDDKBBGDDIDBCECHECEDFEFCJFHBDFAEHEBMDBGCECGDCEHDFBCFEICGAGCCEHEGIEEGFFCKDECCBC@E@FACFCDEGFFGDHDHFJCHGDGGHFHP';
 
       function init_polygons() {
-        eh_polygon = new GPolygon.fromEncoded({
-          polylines: [
-            {
-              color: '#0000ff',
-              weight: 4,
-              opacity: 0.8,
-              points: eh_points,
-              levels: eh_levels,
-              zoomFactor: 2,
-              numLevels: 18,
-            },
-          ],
-          fill: true,
-          color: '#0000ff',
-          opacity: 0.4,
-          outline: true,
-        });
+        function init_polygon(points, color) {
+          let path = google.maps.geometry.encoding.decodePath(points);
+          let value = new google.maps.Polygon({
+            paths: path,
+            strokeColor: color,
+            strokeOpacity: 0.8,
+            strokeWeight: 4,
+            fillColor: color,
+            fillOpacity: 0.4,
+          });
 
-        na_polygon = new GPolygon.fromEncoded({
-          polylines: [
-            {
-              color: '#00ff00',
-              weight: 4,
-              opacity: 0.8,
-              points: na_points,
-              levels: na_levels,
-              zoomFactor: 2,
-              numLevels: 18,
-            },
-          ],
-          fill: true,
-          color: '#00ff00',
-          opacity: 0.4,
-          outline: true,
-        });
+          value.setMap(map);
+          let bounds = new google.maps.LatLngBounds();
+          path.forEach((coord) => bounds.extend(coord));
+          map.fitBounds(bounds);
 
-        eae_polygon = new GPolygon.fromEncoded({
-          polylines: [
-            {
-              color: '#ff0000',
-              weight: 4,
-              opacity: 0.8,
-              points: eae_points,
-              levels: eae_levels,
-              zoomFactor: 2,
-              numLevels: 18,
-            },
-          ],
-          fill: true,
-          color: '#ff0000',
-          opacity: 0.4,
-          outline: true,
-        });
+          return value;
+        }
 
-        ipa_polygon = new GPolygon.fromEncoded({
-          polylines: [
-            {
-              color: '#000000',
-              weight: 4,
-              opacity: 0.8,
-              points: ipa_points,
-              levels: ipa_levels,
-              zoomFactor: 2,
-              numLevels: 18,
-            },
-          ],
-          fill: true,
-          color: '#000000',
-          opacity: 0.4,
-          outline: true,
-        });
+        eh_polygon = init_polygon(eh_points, '#0000FF');
+        na_polygon = init_polygon(na_points, '#00FF00');
+        eae_polygon = init_polygon(eae_points, '#FF0000');
+        ipa_polygon = init_polygon(ipa_points, '#0000cc');
+        la_polygon = init_polygon(la_points, '#CCFFCC');
+        bi_polygon = init_polygon(bi_points, '#33CC33');
+        gi_polygon = init_polygon(gi_points, '#66FF66');
+        ar_polygon = init_polygon(ar_points, '#AAFFAA');
+        zu_polygon = init_polygon(zu_points, '#44FF44');
+        nb_polygon = init_polygon(nb_points, '#77FF77');
 
-        la_polygon = new GPolygon.fromEncoded({
-          polylines: [
-            {
-              color: '#CCFFCC',
-              weight: 4,
-              opacity: 0.8,
-              points: la_points,
-              levels: la_levels,
-              zoomFactor: 2,
-              numLevels: 18,
-            },
-          ],
-          fill: true,
-          color: '#CCFFCC',
-          opacity: 0.4,
-          outline: true,
-        });
+        let ehbounds = google.maps.geometry.encoding.decodePath(eh_points);
+        let bounds = new google.maps.LatLngBounds();
+        ehbounds.forEach((coord) => bounds.extend(coord));
+        map.fitBounds(bounds);
+      }
 
-        bi_polygon = new GPolygon.fromEncoded({
-          polylines: [
-            {
-              color: '#33CC33',
-              weight: 4,
-              opacity: 0.8,
-              points: bi_points,
-              levels: bi_levels,
-              zoomFactor: 2,
-              numLevels: 18,
-            },
-          ],
-          fill: true,
-          color: '#33CC33',
-          opacity: 0.4,
-          outline: true,
+      function initMap() {
+        map = new google.maps.Map(document.getElementById('map'), {
+          zoom: 4, // Default zoom, will be adjusted later
+          center: { lat: 0, lng: 0 }, // Default center
+          mapTypeId: 'terrain',
         });
-
-        gi_polygon = new GPolygon.fromEncoded({
-          polylines: [
-            {
-              color: '#66FF66',
-              weight: 4,
-              opacity: 0.8,
-              points: gi_points,
-              levels: gi_levels,
-              zoomFactor: 2,
-              numLevels: 18,
-            },
-          ],
-          fill: true,
-          color: '#66FF66',
-          opacity: 0.4,
-          outline: true,
-        });
-
-        ar_polygon = new GPolygon.fromEncoded({
-          polylines: [
-            {
-              color: '#AAFFAA',
-              weight: 4,
-              opacity: 0.8,
-              points: ar_points,
-              levels: ar_levels,
-              zoomFactor: 2,
-              numLevels: 18,
-            },
-          ],
-          fill: true,
-          color: '#AAFFAA',
-          opacity: 0.4,
-          outline: true,
-        });
-
-        zu_polygon = new GPolygon.fromEncoded({
-          polylines: [
-            {
-              color: '#44FF44',
-              weight: 4,
-              opacity: 0.8,
-              points: zu_points,
-              levels: zu_levels,
-              zoomFactor: 2,
-              numLevels: 18,
-            },
-          ],
-          fill: true,
-          color: '#44FF44',
-          opacity: 0.4,
-          outline: true,
-        });
-
-        nb_polygon = new GPolygon.fromEncoded({
-          polylines: [
-            {
-              color: '#77FF77',
-              weight: 4,
-              opacity: 0.8,
-              points: nb_points,
-              levels: nb_levels,
-              zoomFactor: 2,
-              numLevels: 18,
-            },
-          ],
-          fill: true,
-          color: '#77FF77',
-          opacity: 0.4,
-          outline: true,
-        });
+        init_polygons();
+        show_polygons();
       }
 
       function gei(id) {
         return document.getElementById(id);
       }
 
-      function addCodeToFunction(func, code) {
-        if (func == undefined) return code;
-        else {
-          return function () {
-            func();
-            code();
-          };
-        }
-      }
-
-      function initialize() {
-        map = new GMap2(document.getElementById('map'));
-        map.addControl(new GSmallZoomControl());
-        map.setCenter(new GLatLng(0, 0), 0);
-
-        bounds = eh_polygon.getBounds();
-        map.setZoom(map.getBoundsZoomLevel(bounds));
-        map.setCenter(bounds.getCenter());
-        add_polygons();
-        show_polygons();
-      }
-
-      function add_polygons() {
-        map.addOverlay(eh_polygon);
-        map.addOverlay(na_polygon);
-        map.addOverlay(eae_polygon);
-        map.addOverlay(ipa_polygon);
-        map.addOverlay(la_polygon);
-        map.addOverlay(bi_polygon);
-        map.addOverlay(gi_polygon);
-        map.addOverlay(ar_polygon);
-        map.addOverlay(zu_polygon);
-        map.addOverlay(nb_polygon);
-      }
-
       function show_polygons() {
         if (gei('eh').checked == true) {
-          eh_polygon.show();
+          eh_polygon.setMap(map);
         } else {
-          eh_polygon.hide();
+          eh_polygon.setMap(null);
         }
         if (gei('na').checked == true) {
-          na_polygon.show();
+          na_polygon.setMap(map);
         } else {
-          na_polygon.hide();
+          na_polygon.setMap(null);
         }
         if (gei('eae').checked == true) {
-          eae_polygon.show();
+          eae_polygon.setMap(map);
         } else {
-          eae_polygon.hide();
+          eae_polygon.setMap(null);
         }
         if (gei('ipa').checked == true) {
-          ipa_polygon.show();
+          ipa_polygon.setMap(map);
         } else {
-          ipa_polygon.hide();
+          ipa_polygon.setMap(null);
         }
         if (gei('la').checked == true) {
-          la_polygon.show();
+          la_polygon.setMap(map);
         } else {
-          la_polygon.hide();
+          la_polygon.setMap(null);
         }
         if (gei('bi').checked == true) {
-          bi_polygon.show();
+          bi_polygon.setMap(map);
         } else {
-          bi_polygon.hide();
+          bi_polygon.setMap(null);
         }
         if (gei('gi').checked == true) {
-          gi_polygon.show();
+          gi_polygon.setMap(map);
         } else {
-          gi_polygon.hide();
+          gi_polygon.setMap(null);
         }
         if (gei('ar').checked == true) {
-          ar_polygon.show();
+          ar_polygon.setMap(map);
         } else {
-          ar_polygon.hide();
+          ar_polygon.setMap(null);
         }
         if (gei('zu').checked == true) {
-          zu_polygon.show();
+          zu_polygon.setMap(map);
         } else {
-          zu_polygon.hide();
+          zu_polygon.setMap(null);
         }
         if (gei('nb').checked == true) {
-          nb_polygon.show();
+          nb_polygon.setMap(map);
         } else {
-          nb_polygon.hide();
+          nb_polygon.setMap(null);
         }
       }
-
-      window.onload = addCodeToFunction(window.onload, function () {
-        if (GBrowserIsCompatible()) {
-          init_polygons();
-          initialize();
-        } else {
-          alert('Your browser does not support JavaScript!');
-        }
-      });
-
-      window.onunload = GUnload;
     </script>
   </head>
   <body>
